@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Reply Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 600px;
+            text-align: center;
+        }
+        textarea, input, select {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Email Reply Generator</h2>
+    <form action="/generate" method="post">
+        <textarea name="emailContent" placeholder="Enter email content..." rows="6" ></textarea>
+
+        <select name="tone">
+            <option value="" disabled>Select Tone</option>
+            <option value="Formal" ${emailRequest.tone == 'Formal' ? 'selected' : ''}>Formal</option>
+            <option value="Informal" ${emailRequest.tone == 'Informal' ? 'selected' : ''}>Informal</option>
+            <option value="Polite" ${emailRequest.tone == 'Polite' ? 'selected' : ''}>Polite</option>
+        </select>
+
+        <button type="submit">Generate Reply</button>
+    </form>
+
+    <textarea rows="6" th:text="${response}" placeholder="Your response will be visible here">${response}</textarea>
+</div>
+</body>
+</html>
